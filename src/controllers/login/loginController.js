@@ -4,10 +4,10 @@ const loginService = require('../../services/userServices')
 
 const login = async function (req, res) {
     userdata = req.body
-    username = userdata.username
+    email = userdata.email
     password = userdata.password
 
-    user = await loginService(username)
+    user = await loginService(email)
 
     if (user) {
 
@@ -17,11 +17,11 @@ const login = async function (req, res) {
             console.log('User exists:', user.dataValues);
             token = jwt.sign({username, role}, process.env.JWT_SECRET_KEY, {expiresIn: '2d', httpOnly: true})
             res.cookie('authToken', token)
-            res.json({  fullname: user.full_name, 
-                        email: user.email, 
-                        username: user.username, 
+            res.json({  fullname: user.full_name,
+                        email: user.email,
+                        username: user.username,
                         userId: user.user_id})
-        
+
         } else {
             console.log('Incorrect password');
             res.json({"error": "Incorrect password"})
@@ -34,4 +34,3 @@ const login = async function (req, res) {
     }
 
 module.exports = login
-

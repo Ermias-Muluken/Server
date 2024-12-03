@@ -1,7 +1,7 @@
-const User = "../models/userModel"
+const User =require( "../models/userModel")
 
-const loginService = async (username) => User.findOne({
-    where: {username}
+const loginService = async (email) => User.findOne({
+    where: {email}
 })
 
 module.exports = loginService

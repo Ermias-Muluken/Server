@@ -1,5 +1,6 @@
 const express = require('express');
-const Routes  = require('./routes/roleRoutes');// Import the PostgreSQL pool
+const roleRoutes  = require('./routes/roleRoutes');// Import the PostgreSQL pool
+const loginRoutes  = require('./routes/loginRoutes'); //Import the login routes
 
 const app = express();
 const PORT = 3000;
@@ -8,7 +9,8 @@ app.use(express.json());
 
 require('dotenv').config();
 
-app.use('/api', Routes);
+app.use('/api', roleRoutes);
+app.use('/login',loginRoutes);
 
 app.get('/', (req, res) => {
   res.send('Server is running...');
@@ -17,4 +19,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
